@@ -1,0 +1,12 @@
+/* Events.css */
+.event-card {
+  border: 1px solid #dee2e6;
+  border-radius: 15px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.event-card:hover {
+  transform: scale(1.03);
+  background-color: #f8f9fa;
+}

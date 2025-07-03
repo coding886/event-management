@@ -1,0 +1,11 @@
+.add-event {
+  background-color: #f4f7fa;
+  min-height: 100vh;
+}
+
+.form-card {
+  background: white;
+  max-width: 600px;
+  margin: auto;
+  border-radius: 16px;
+}
