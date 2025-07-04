@@ -1,18 +1,16 @@
+
 const express = require('express'); 
 const cors = require('cors');
 const bodyParser = require('body-parser');
 require('dotenv').config();
 
-const db = require('./config/db');  // import MySQL connection
+// Use mysql2 instead of mysql
+const mysql = require('mysql2');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Test MySQL connection
-
-require('dotenv').config();
-const mysql = require('mysql');
-
+// MySQL Connection
 const connection = mysql.createConnection({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
@@ -29,34 +27,29 @@ connection.connect((err) => {
   }
 });
 
+// Export connection if needed elsewhere
 module.exports = connection;
-
 
 // Middlewares
 app.use(cors());
 app.use(bodyParser.json());
 
-// Simple test route
+// Test route
 app.get('/', (req, res) => {
   res.send('College Event Management Backend Running 🚀');
 });
 
-// Start the server
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
-
-
+// Routes
 const userRoutes = require('./routes/userRoutes');
 app.use('/api/users', userRoutes);
-
 
 const eventRoutes = require('./routes/eventRoutes');
 app.use('/api/events', eventRoutes);
 
-
 const registrationRoutes = require('./routes/registrationRoutes');
 app.use('/api/registrations', registrationRoutes);
 
-
-
+// Start server
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
